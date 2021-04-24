@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from . import util
+from markdown2 import Markdown
 
 
 def index(request):
@@ -9,4 +10,14 @@ def index(request):
     })
 
 def entries(request):
-    return render(request, "entries/CSS.md")
+    markdowner = Markdown()
+
+    f = open('entries/CSS.md', 'r')
+
+    md_variable = markdowner.convert(f.read())
+
+    print(md_variable)
+
+
+    return render(request, "encyclopedia/entries.html", {
+		"md_variable": md_variable})

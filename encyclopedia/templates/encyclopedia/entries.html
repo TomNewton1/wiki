@@ -1,11 +1,10 @@
 {% extends "encyclopedia/layout.html" %}
 
-{% load markdown_deux_tags %}
 
 {% block body %}
 
 
-<!-- Simply set the `src` attribute to your MD file and win -->
-<zero-md src="CSS.md"></zero-md>
+{{ md_variable|safe}}
+
 
 {% endblock %}
