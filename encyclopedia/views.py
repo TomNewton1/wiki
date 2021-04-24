@@ -9,15 +9,20 @@ def index(request):
         "entries": util.list_entries()
     })
 
-def entries(request):
-    markdowner = Markdown()
+def md_to_html(request, title):
 
-    f = open('entries/CSS.md', 'r')
+    if util.get_entry(title) is None: 
 
-    md_variable = markdowner.convert(f.read())
+        return render(request, "encyclopedia/errorpage.html")
 
-    print(md_variable)
+    else: 
 
+        entry_name = util.get_entry(title) 
 
-    return render(request, "encyclopedia/entries.html", {
-		"md_variable": md_variable})
+        markdowner = Markdown()
+
+        md_variable = markdowner.convert(entry_name)
+
+        return render(request, "encyclopedia/entries.html", {
+            "md_variable": md_variable})
+
