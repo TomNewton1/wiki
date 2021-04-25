@@ -4,6 +4,6 @@ from . import views
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("encyclopedia/<str:title>", views.md_to_html, name="entries")
-    #path("<str:entryname>", views.entires, name="entires")
+    path("encyclopedia/<str:title>", views.md_to_html, name="entries"),
+    path("search", views.get_search, name="search")
 ]
