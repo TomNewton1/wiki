@@ -6,5 +6,9 @@
 
 {{ md_variable|safe}}
 
+<form action="{% url 'edit'%}" action="get">
+    <button method="post" type="submit">Edit entry</button>
+</form>
+
 
 {% endblock %}

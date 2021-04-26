@@ -60,24 +60,57 @@ def get_search(request):
 
             entry_name = [entry for entry in util.list_entries() if form_input in entry]
 
-            print("Did you mean: ", entry_name)
+            # Loop through the list and append all the items that have the form input substring. 
 
+            suggested_entries = []
 
-            print(f"Your input {form_input} was in the entries list!")
-
+            for entry in util.list_entries():
+                if form_input in entry:
+                    suggested_entries.append(entry)
 
             return render(request, "encyclopedia/subsearch.html", {
-                "entry_name": entry_name, "entries": util.list_entries()
+                "suggested_entries": suggested_entries
             })
-
 
         else: 
 
             return render(request, "encyclopedia/errorpage.html")
 
 
-    else: 
-
-        print("form not posting")
         
+def newpage(request): 
     
+    if request.method == "GET": 
+        
+        return render(request, "encyclopedia/newpage.html")
+
+    elif request.method =="POST":
+
+        form_title = request.POST['entry_title']
+        form_entry = request.POST["entry_contents"]
+
+        complete_entry = f"#{form_title}\n{form_entry}"
+
+        util.save_entry(form_title,complete_entry) # Calls the save entry function
+
+        # Convert md to html 
+
+        markdowner = Markdown()
+
+        #md_title= markdowner.convert(f"# {form_title}")
+        #md_contents= markdowner.convert(form_entry)
+        md_contents= markdowner.convert(complete_entry)
+
+        return render(request, "encyclopedia/entries.html", {
+            "md_variable": md_contents })
+
+
+def edit(request):
+
+    if request.method == "GET":
+
+        # Show a page
+
+        print("you reached the edit page")
+
+        return render(request, "encyclopedia/errorpage.html")
