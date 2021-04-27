@@ -6,7 +6,8 @@
 
 {{ md_variable|safe}}
 
-<form action="{% url 'edit'%}" action="get">
+<form action="{% url 'edit' %}" action="get">
+    <input id="prodId" name="hidden_entry" type="hidden" value={{ md_variable.split|join:'+' }}>
     <button method="post" type="submit">Edit entry</button>
 </form>
 
