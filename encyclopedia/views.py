@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
+import random
 
 import re
 
@@ -26,7 +27,7 @@ def md_to_html(request, title):
 
         md_variable = markdowner.convert(entry_name)
 
-        print("The entry name as a md_variable is: ", md_variable)
+        print("MD variable for normal entry:", md_variable)
 
         return render(request, "encyclopedia/entries.html", {
             "md_variable": md_variable})
@@ -129,10 +130,13 @@ def edit(request):
 
         # Edit the contents to remove the title from the main contents 
 
-        
+        print("The title I want to replace is: ", title)
+
+        updated_contents = contents.replace((f"# {title}" or f"#{title})") ,'')
+
 
         return render(request, "encyclopedia/editpage.html", {
-            "title": title, "contents": contents })
+            "title": title, "contents": updated_contents })
     
     elif request.method == "POST":
 
@@ -143,7 +147,7 @@ def edit(request):
         form_title = request.POST['entry_title']
         form_entry = request.POST["entry_contents"]
 
-        complete_entry = f"#{form_title}\n{form_entry}"
+        complete_entry = f"# {form_title}{form_entry}"
 
         util.save_entry(form_title,complete_entry) # Calls the save entry function
 
@@ -158,3 +162,19 @@ def edit(request):
         return render(request, "encyclopedia/entries.html", {
             "md_variable": md_contents })
 
+
+
+def random_page(request):
+
+    random_entry = random.choice(util.list_entries())
+
+    print("The random entry is:", random_entry)
+
+    markdowner = Markdown()
+
+    md_variable = markdowner.convert(random_entry)
+
+    print("MD variable for random entry:", md_variable)
+
+    return render(request, "encyclopedia/entries.html", {
+        "md_variable": md_variable})
