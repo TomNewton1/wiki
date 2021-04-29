@@ -19,7 +19,9 @@ def md_to_html(request, title):
 
         return render(request, "encyclopedia/errorpage.html")
 
-    else: 
+    else:
+
+        print("the mf function is being returned")
 
         entry_name = util.get_entry(title)
 
@@ -100,16 +102,10 @@ def newpage(request):
 
             util.save_entry(form_title,complete_entry) # Calls the save entry function
 
-            # Convert md to html 
+            # Return the md function
 
-            markdowner = Markdown()
+            return (md_to_html(request, form_title))
 
-            #md_title= markdowner.convert(f"# {form_title}")
-            #md_contents= markdowner.convert(form_entry)
-            md_contents= markdowner.convert(complete_entry)
-
-            return render(request, "encyclopedia/entries.html", {
-                "md_variable": md_contents })
 
 
 def edit(request):
@@ -151,16 +147,10 @@ def edit(request):
 
         util.save_entry(form_title,complete_entry) # Calls the save entry function
 
-        # Convert md to html 
+        # Pass to the md function 
 
-        markdowner = Markdown()
+        return (md_to_html(request, form_title))
 
-        #md_title= markdowner.convert(f"# {form_title}")
-        #md_contents= markdowner.convert(form_entry)
-        md_contents= markdowner.convert(complete_entry)
-
-        return render(request, "encyclopedia/entries.html", {
-            "md_variable": md_contents })
 
 
 
@@ -174,7 +164,7 @@ def random_page(request):
 
     md_variable = markdowner.convert(random_entry)
 
-    print("MD variable for random entry:", md_variable)
+    print("MD variable for entry:", md_variable)
 
     return render(request, "encyclopedia/entries.html", {
         "md_variable": md_variable})

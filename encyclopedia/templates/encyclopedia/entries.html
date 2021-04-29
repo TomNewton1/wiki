@@ -6,12 +6,11 @@
 
 {{ md_variable|safe}}
 
-<form action="{% url 'edit' %}" action="get">
-    <input id="hidden_entry" name="hidden_entry" type="hidden" value={{ md_variable.split|join:'+' }}>
+<form action="{% url 'edit' %}" method="get">
+    {% csrf_token %}
+    <input id="hidden_entry" name="hidden_entry" type="hidden" value="{{ md_variable.split|join:'+' }}">
     <button type="submit">Edit entry</button>
 </form>
 
 
 {% endblock %}
-
-
