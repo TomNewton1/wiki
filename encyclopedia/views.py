@@ -21,15 +21,11 @@ def md_to_html(request, title):
 
     else:
 
-        print("the mf function is being returned")
-
         entry_name = util.get_entry(title)
 
         markdowner = Markdown()
 
         md_variable = markdowner.convert(entry_name)
-
-        print("MD variable for normal entry:", md_variable)
 
         return render(request, "encyclopedia/entries.html", {
             "md_variable": md_variable})
@@ -102,9 +98,7 @@ def newpage(request):
 
             util.save_entry(form_title,complete_entry) # Calls the save entry function
 
-            # Return the md function
-
-            return (md_to_html(request, form_title))
+            return redirect ("entries", title=form_title)
 
 
 
@@ -115,6 +109,8 @@ def edit(request):
         # Pass all required info into the form input fields and allow user to edit form. 
 
         entry_contents = request.GET['hidden_entry']
+
+        print("The entry contents are:", entry_contents)
 
         entry_contents_parsed = re.findall(r'<h1>(.+?)</h1>', entry_contents)
 
@@ -138,8 +134,6 @@ def edit(request):
 
         # If the user is posting info then we need to update the form. 
 
-        print("You have edited the page")
-
         form_title = request.POST['entry_title']
         form_entry = request.POST["entry_contents"]
 
@@ -147,24 +141,13 @@ def edit(request):
 
         util.save_entry(form_title,complete_entry) # Calls the save entry function
 
-        # Pass to the md function 
-
-        return (md_to_html(request, form_title))
-
-
+        return redirect ("entries", title=form_title)
 
 
 def random_page(request):
 
-    random_entry = random.choice(util.list_entries())
+    form_title = random.choice(util.list_entries())
 
-    print("The random entry is:", random_entry)
+    print("The random entry is:", form_title)
 
-    markdowner = Markdown()
-
-    md_variable = markdowner.convert(random_entry)
-
-    print("MD variable for entry:", md_variable)
-
-    return render(request, "encyclopedia/entries.html", {
-        "md_variable": md_variable})
+    return redirect ("entries", title=form_title)
