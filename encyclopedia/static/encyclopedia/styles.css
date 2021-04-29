@@ -21,10 +21,16 @@ textarea {
     padding: 10px;
 }
 
+/*
+
 .search {
-    width: 100%;
-    font-size: 15px;
-    line-height: 15px;
+
+}
+
+*/
+
+ul{
+    line-height: 40px;
 }
 
 .sidebar {
@@ -35,4 +41,9 @@ textarea {
 
 .sidebar h2 {
     margin-top: 5px;
+}
+
+.home_index{
+    margin-top: 10px;
+    margin-left: 20px;
 }

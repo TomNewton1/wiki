@@ -6,6 +6,8 @@
 
 {{ md_variable|safe}}
 
+
+
 <form action="{% url 'edit' %}" method="get">
     {% csrf_token %}
     <input id="hidden_entry" name="hidden_entry" type="hidden" value="{{ md_variable.split|join:'+' }}">
