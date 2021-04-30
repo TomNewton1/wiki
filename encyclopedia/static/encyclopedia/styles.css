@@ -29,6 +29,11 @@ textarea {
 
 */
 
+.responsive {
+    width: 100%;
+    height: auto;
+  }
+
 ul{
     line-height: 40px;
 }
