@@ -11,11 +11,11 @@ Wiki is a wikipedia like web application built in Django. The site allows users 
 
 **Entry Page:** Each entry is stored locally in a Markdown file. 
 
-**Index Page:** Show a list of all entries in the encyclopdia. 
+**Index Page:** Shows a list of all entries in the encyclopdia. 
 
 **Search:** Allows users to search for entries in the encyclopedia. This can be done using the url or search input field, redirecting users to the entry. If the search query is a substring of any entry, a list will be created of all possible entries. 
 
-**New Page:**: Allows users to create a new entry using Markdown formating.
+**New Page:** Allows users to create a new entry using Markdown formating.
 
 **Edit Page:** Users are able to edit entries.
 
