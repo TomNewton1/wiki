@@ -21,7 +21,7 @@ Wiki is a wikipedia like web application built in Django. The site allows users 
 
 **Random Page:** Will redirect the user to a random page from the list of encyclopedia entries. 
 
-**Markdown to HTML conversion:** When the user requests an entry the entries Markdown file is converted to HTML using the "markdown2" library.
+**Markdown to HTML conversion:** When the user requests an entry the entries Markdown file is converted to HTML using the `markdown2` library.
 
 
 
