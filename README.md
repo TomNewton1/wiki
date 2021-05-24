@@ -2,7 +2,7 @@
 ### Web application that aims to implement Wikipedialike functionality.
 
 
-![](/static/wiki_video.gif)
+![](encyclopedia/static/encyclopedia/wiki_video.gif)
 
 
 ## Description
